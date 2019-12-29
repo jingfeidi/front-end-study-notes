@@ -1,0 +1,262 @@
+1.进出栈操作
+  js是按照标准的“栈式操作”访问数组（访问数组的一种方式）
+  所有的栈式操作的特点都是"后进先出"
+  1.push()
+    入栈，在栈顶（数组的尾部）添加指定的元素，并返回新数组的长度.
+    var arr=[10,20,30];
+    //向数组中增加新元素
+    var newArr=arr.push(40);
+    console.log(newArr)
+  2.pop()
+    出栈，删除（删除栈顶数据）并返回删除元素
+    ex:
+    var arr=[10,20,30];
+    var r1=arr.pop(); 
+    console.log(r1); //30
+    var r2=arr.pop();
+    console.log(r2); //20
+  3.shift()
+    删除数组头部的（第一个）元素并返回删除元素
+    var arr=[10,20,30];
+    var re=arr.shift();
+  4.unshift()
+    作用：在数组的头部（第一个）元素位置处，增加新元素，并返回新数组的长度
+    var arr=[10,20,30];
+    var res=arr.unshift(40); //4
+    结果：arr=[40,10,20,30]
+2.二维数组
+  1.什么是二维数组
+    在一个数组中的元素又是一个数组，也可以称为数组的数组
+  2.二维数组的使用
+    var names=[
+         ["孙悟空","猪八戒","沙和尚"],
+	 ["曹操","大乔","小乔"],
+	 ["贾宝玉","林黛玉","薛宝钗"]
+	];
+     //获取 "大乔"
+       console.log(names[1][1]);
+      练习：
+        根据省份信息，查询城市列表 8分
+	1.创建一个数组，保存省份名称
+	2.创建一个二维数组，保存上面省份中的城市信息（城市信息要与上面省份相对应）
+	3.创建一个函数，接收一个省份名称作为参数，打印该省份对应的所有城市列表
+
+1.ajax
+  1.URL
+    1.URL的作用
+      用于表示任意一个资源的位置（互联网上）
+    2.详解
+      格式：
+      <scheme>://<user>:<pwd>@<host>:<port>/<path>;<params>?<query>#<frag>
+      scheme:方案\协议，以哪种方式到服务获取资源，协议不区分大小写，常见的协议：http,https,ftp
+        ssh:安全的远程登录
+        SMTP:邮件传输
+        POP3：邮件接收
+        DNS：域名解析
+        TELNET:远程登录
+    host:主机名，服务器主机名或IP地址或域名（由DNS转换为IP地址） 127.0.0.1=localhost 
+    port:端口号 80 443
+    user:用户名，访问某些特定资源时需要用到的信息
+    pwd:密码，访问某些特定资源时需要用到的密码
+    path:路径，资源在服务器上具体存放位置
+    params:参数（跟服务器有关）
+    query:查询字符串，要传递给服务器的数据
+       http://127.0.0.1/login.php?uname=dangdang&upwd=12345
+    frag:锚点
+       http://127.0.0.1/a.html#NO1
+
+
+
+
+
+
+   http://img12.360buyimg.com/babel/jfs/t13804/61/581101319/94660/bead4bc3/5a0eaa1aNa2c916a2.jpg
+  2.HTTP协议
+    1.什么是HTTP 
+      Hyper Text Transfer Protocol:超文本传输协议
+      规范了数据如何打包以及传递
+    2.详解
+      1.请求（request）消息
+        客户端带给服务器的数据都有哪些，由三部分组成
+	  1.请求的起始行
+	    1.请求方法
+	      1.GET
+	        表示客户端向服务器获取资源时使用
+	        特点：
+		   1.无请求主体
+		   2.靠地址栏传递查询字符串
+	      2.POST
+	        表示想传递数据给服务器时使用
+		特点：
+		   1.有请求主体
+	      3.PUT
+	        表示客户端想放置文件到服务器（禁用）
+	      4.DELETE
+	        表示客户端要删除服务器端的数据（禁用）
+	      5.HEAD
+	        表示客户端只想获取指定的响应头
+	      6.CONNECT
+	        测试连接
+	      7.TRACE
+	        追踪请求路径
+	      8.OPTIONS
+	        选项，保留以后使用
+	    2.请求URL
+	    3.协议版本：HTTP/1.1
+	  2.请求头
+	    1.Host:localhost/127.0.0.1
+	      作用：告诉浏览器请求哪一个主机
+	    2.Connection:keep-alive
+	      作用：告诉服务器要进行持久连接
+	    3.User-Agent:
+	      作用：告诉服务器自己（浏览器）的类型
+	    4.Accept-Language:zh-cn
+	      作用：告诉服务器自己能接纳的自然语言
+	    5.Accept-Encoding:gzip
+	      作用：告诉服务器自己能接收的数据压缩类型是什么
+	    6.Referer:http:localhost/Day01/login.html
+	      作用：告诉服务器请求来自哪个页面
+          3.请求主体
+	    Form  Data
+      2.响应（response）消息
+        1.响应起始行
+	  1.协议版本号：HTTP/1.1
+	  2.响应状态码
+	    作用：告诉浏览器，服务器的响应状态是什么问题（有问题，没有问题，有问题\问题大概是什么）
+	    1xx:100-199 提示信息
+	    2xx:成功响应
+	        200:ok
+	    3xx：需要进行重定向
+	        301：永久性重定向
+		302：临时重定向
+		304：Not Modified
+	    4xx:客户端请求错误
+	        404：Not Found 请求资源不存在
+		403：Forbidden 权限不够
+		405：Method Not Allowed 请求方法不被允许
+	    5xx:服务器运行错误
+	        500：服务器内部错误
+	  3.原因短句
+	    对状态码的简单解释
+        2.响应头
+	  1.Date
+	    作用：告诉浏览器，服务器的响应时间
+	          格林尼治时间（+8h）
+	  2.Connection
+	    作用：告诉浏览器已经启动持久连接
+	  3.Content-Type
+	    作用：响应主体的类型是什么，告诉浏览器，用什么样的方式解析响应主体
+	       1.text/html:响应回来的数据是html文本
+	       2.text/plain:响应回来的数据是普通文本
+	       3.text/css:响应回来的数据是css样式
+	       4.application/xml:响应回来的数据是xml格式
+	       5.application/javascript:响应回来的数据是js脚本代码
+	       6.application/json:响应回来的数据是json格式的字符串
+	       7.images/jegp:响应回来的数据是图片
+        3.响应主体
+	  Response
+  3.缓存
+    1.什么是缓存 & 工作原理
+      客户端将服务器响应回来的数据进行自动保存，当再次访问时，直接使用保存的数据。
+    2.缓存的优点
+      1.减少了冗余数据的传输，节省客户端流量
+      2.可以节省服务器带宽
+      3.降低对服务器资源的消耗和运行要求
+      4.降低了由于远距离而造成的延时加载
+    3.与缓存相关的消息头
+      1.Cache-Control消息头
+        作用：从服务器将文档传到客户端时起，可以认为此文档处于新鲜的秒数
+	语法：
+	   Cache-Control:max-age=处于新鲜的秒数
+	   ex:
+	     Cache-Control:max-age=3600;
+	     Cache-Control:max-age=0;每次都从服务器下载新资源
+      2.Expires消息头
+        作用：指定缓存过期的确切时间（格林尼治时间）
+	语法：Expires:Thu,23 Nov 2017    GMT
+	如果希望客户端不缓存，可以给一个过期的时间
+	Expires:Wed,22 Nov 2017 00:00:00 GMT
+	Expires:0;---此方法不标准，执行性不是特别好
+    4.在网页上设置消息头
+      1.更改服务器配置
+      2.网页上增加消息
+        <meta http-equiv="消息头" content="值">
+        ex:
+	<meta http-equiv="Cache-Control" content="max-age=3600">
+	或
+	<meta http-equiv="Expires" content="0">
+      php:
+        header("Expires:0");
+	Response.AddHeader("Expires","0");
+4.DOM操作
+  1.什么是DOM
+    1.DOM：Document Object Model
+      文档对象模型
+      让js动态的操作页面的元素
+      <input type="text">
+      <div>这是一个div</div>
+
+ 2.使用js获取页面上的某个元素
+   1.为元素增加id属性
+     <div id="d1"></div>
+     <input type="text" id="uname">
+   2.在js中，允许通过元素的id来获取页面指定的元素
+   var elem=document.getElementById("元素id");
+   elem就是指定id元素在js中的表现形式（DOM对象）
+   练习：
+     1.创建一个网页
+     2.在网页中创建一个div，id为d1,内容自定义
+     3.在页面中创建一个p，id为test,内容自定义
+     4.在页面中创建一个按钮，点击按钮时，将id为d1的元素获取出来，同时将id为test的元素也获取出来，并打印在空控制台，观察结果。
+ 3.获取/设置元素中的内容
+   <div id="d1">这是一个div元素</div>
+   DOM对象的一个属性：innerHTML	
+   表示的就是标签内的文本
+     ex：获取div标签中的文字内容
+     1.获取div元素
+        var d=document.getElementById("d1");
+     2.获取div元素中的文本内容
+        console.log(d.innerHTML);
+     3.更改div元素内的文本内容为"这是更改后的文本"
+        d.innerHTML="这是更改后的文本";
+     练习：
+       1.在上面练习的基础上完成以下操作
+          1.添加一个按钮，点击时，获取div中的文本，并打印在控制台
+	  2.再添加一个按钮，点击时，将div中的文本内容更改为“这是我的第一个DOM操作”
+ 4.获取/设置表单控件的数据
+   <input type="text" value="">
+   <input type="password" value="">
+   <input type="radio" value=""> ...
+   <select>
+      <option value="0">北京</option>
+      <option value="1">天津</option>
+   </select>
+   在DOM中，表单控件们，是通过DOM对象的value属性来获取/设置表单控件的值
+   步骤：
+      1.通过id获取表单控件元素
+      2.通过DOM对象的 value 属性获取/设置控件的值
+      ex:<input type="text" value="请输入用户名">
+     练习：
+      1.页面中创建一个文本框id="uname",再创建一个div元素id="d1",再创建一个按钮
+      2.当点击按钮时，将文本框的数据，显示在div中
+        
+
+
+   
+
+    
+
+
+
+
+        
+        
+      
+ 
+
+      
+
+
+
+
+

@@ -1,0 +1,141 @@
+1.使用ajax发送post请求
+  注意两点：
+     1.post的请求将数据放在请求主体中
+       xhr.send(body);
+       ex:
+       xhr.send("uname=value1&upwd=value2");
+     2.在发送请求之前，需要手动修改请求消息头
+       xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+     练习：
+       使用ajax的post请求方式完成异步的注册-参考学子商城-注册页
+         1.创建一个register.html页面
+	   包含以下表单控件
+	      uname-<input type="text">
+	     登录名重复性验证，失去焦点时验证数据库中是否存在该用户名
+	      upwd-<input type="password">
+	      email-<input type="email">
+	      phone-<input type=text>
+	      user_name-<input type="text">
+	      gender-<select>
+           注册按钮：<input type="button">
+	   单击按钮时，使用post提交方式，异步发送register.php，并且完成注册给出响应（注册成功/注册失败）
+2.js对象数据格式
+  1.js对象的数据格式
+    var lindaiyu=[];
+        lindaiyu[0]="林黛玉";
+	lindaiyu[1]="1990";
+	lindaiyu[2]="160cm";
+	lindaiyu[3]="50kg";
+    改版：
+    var lindaiyu=[];
+        lindaiyu["name"]="林黛玉";
+	lindaiyu["birth"]="1990";
+	lindaiyu["height"]="160cm";
+	lindaiyu["weight"]="50kg";
+	ex:取值
+	  lindaiyu["name"]
+	数组描述的是林黛玉的个人信息，如果你把林黛玉看成是一个对象，那么她的个人信息就是她这个对象的属性。
+    js对象的语法：
+        var 对象名={
+	   属性：值,
+	   属性：值,
+	   属性：值,
+	   属性：值
+	};
+	ex:林黛玉这个对象所对应的属性如下
+	var lindaiyu={
+	   name:"林黛玉",
+	   birth:"1990",
+	   height:"160cm",
+	   weight:"50kg",
+	}
+      如果对象取值的时候，直接对象.属性 名称就可以
+       ex:lindaiyu.name --->林黛玉
+      练习：
+         1.创建一个对象，贾宝玉
+	 2.该对象包含三个属性
+	     name,值为 贾宝玉
+	     height,值为 178cm
+	     gender,值为 男
+	 3.控制台上分别将贾宝玉的三个属性输出
+  2.JSON
+    1.什么是JSON
+      JavaScript  Object Notation
+         js         对象 表现方式
+      js对象表示法，即以js对象的格式表现出来的字符串。
+    2.JSON语法
+      1.JSON对象
+        1.用一对{}来表示一个对象
+	2.对象的属性名称，必须用""引起来（单引号不可以），值如果是字符串的话，必须也用""引起来。
+	ex:
+	var computer='{
+	    "name":"电脑",
+	    "price":5600
+	    }'
+      2.JSON数组
+        1.普通数组
+	   '["小乔","大乔","貂蝉"]'
+	2.对象数组
+	  '[
+	      {
+	        "name":"小乔",
+		"height":"160cm",
+		"age":18
+	      },
+	       {
+	        "name":"大乔",
+		"height":"163cm",
+		"age":20
+	      },
+	      {
+	        "name":"貂蝉",
+		"height":"165cm",
+		"age":21
+	      }
+	  ]'
+    3.JSON文件创建
+      以.json为后缀的文件，里面包含的是符合json格式的数据
+
+    4.将JSON字符串，转换成js对象/数组
+      var mperson='{"name":"TOM","age":18}';
+      //json对象
+
+       var arr='["小乔","大乔","貂蝉"]';
+       //json数组
+
+       var arr1='[
+           {"name":"Lucy","age":19},
+	   {"name":"Lily","age":19}
+       ]';  //json数组
+    如何把上面的数据转换成js对象/数组格式
+       1.使用eval()将数据转换成js对象数组（不推荐）
+       2.使用JSON.parse()来将JSON字符串解析为js对象
+         var obj=JSON.parse(mperson); //js对象
+	 var obj=JSON.parse(arr);//js数组
+	 var obj=JSON.parse(arr1);//js数组
+     练习：
+        1.创建一个user.json文件，里面包含一个数组，数组中有3个对象，每个对象包含uname,upwd,gengder属性，分别赋值
+	2.在网页中使用异步请求的方式向json文件发送请求，并按找以下格式输出
+	     用户名称：XXX
+	     用户密码：XXX
+	     用户性别：X
+          
+	     用户名称：XXX
+	     用户密码：XXX
+	     用户性别：X
+
+	     用户名称：XXX
+	     用户密码：XXX
+	     用户性别：X
+
+
+
+
+      
+
+
+
+        
+  
+ 

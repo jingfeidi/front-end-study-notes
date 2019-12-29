@@ -1,0 +1,116 @@
+复习：
+1.使用AJAX发送POST请求
+   1.xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+   2.xhr.send("name1=value1&name2=value2");
+2.JS对象数据格式
+  var 对象名={
+     属性：值,
+     属性：值,
+     属性：值
+  }
+  取值：对象名称.属性
+3.JSON数据格式
+  var person='{
+     "name":"TOM",
+     "age":12
+  }'
+4.将JSON格式的数据转换js对象/数组
+  1.eval()
+  2.JSON.parse
+ ===================
+ 1.在php中，可以直接将数组转换成json格式的字符串
+   语法：
+     通过json_encode()将数组转换为JSON字符串，并返回转换后的结果
+     ex:
+       在php中
+       $array=["钉钉","当当","冰冰"];
+       $str=json_encode($array);
+    练习：
+       1.php中读取学子用户表中的数据，并将结果转换为关联数组，输出给前端时注意转换为json格式
+       2.网页中用户表的数据展示
+
+ 2.XML
+   AJAX:Asynchronous Javascript And Xml
+   1.什么是XML
+     eXtensible Markup Language
+      可扩展的  标记    语言
+     XML的标记没有被预定义过，需要自定义
+     XML的宗旨是做数据传递的，而非显示数据
+   2.XML的语法结构
+     XML可以独立保存为***.xml的文件，也可以以字符串的形式出现
+       1.XML的最顶端是XML的声明
+         <?xml version="1.0" encoding="utf-8"?>
+       2.XML标记的语法
+         1.XML标记必须成对出现
+	   <person> 错误
+	 2.XML严格区分大小写，开始和结束必须一致
+	   <person></person> 正确
+	   <Person></person> 错误
+	 3.XML的标记允许被嵌套，注意嵌套顺序
+	   <person>
+	      <name>
+	         <FirstName></FirstName>
+		 <LastName></LastName>
+	      </name>
+	   </person>
+	  4.每个标记都允许自定义属性，格式与html一致，但属性值，必须用""括起来
+	    <person no="1001"></person>
+	  5.每个XML文档，必须有一个根元素
+   3.解析XML文档对象的内容
+     1.核心方法
+       elem.getElementsByTagName("标签名称");
+       返回值：返回一个包含指定元素们的“类数组” （用for循环遍历）
+       ex:var xmlDoc=xhr.responseXML;
+         xmlDoc.getElementsByTagName("Student");
+   4.在PHP中返回XML格式的字符串
+     1.必须增加响应消息头
+       header("Content-Type:application/xml");
+     2.按照XML的语法结构，拼xml字符串，再响应给前端
+  $xml="<?xml version='1.0' encoding='utf-8'?>";
+  $xml.="<StudentList>";
+  ...
+  $xml.="</StudentList>";
+  echo $xml;
+
+  练习：完成用户登录
+     1.创建一个02-login.html(非ajax)
+       提供以下控件
+         1.登录名称-文本框
+	 2.登录密码-密码框
+	 3.登录按钮
+     2.创建02-login.php
+       接收前端提交过来的数据u，判断用户登录是否成功，并给出提示。
+	    
+	   
+     
+
+     
+
+
+ ==============项目
+    1.完成用户注册
+      1.创建一个01-register.html（非ajax）
+         提供以下控件（表单）
+	 //注意元素name属性
+	 1.登录名称-文本框
+	 2.登录密码-密码框
+	 3.确认密码-密码框
+	 4.用户邮箱-电子邮件
+	 5.联系方式-文本框
+	 6.用户姓名-文本框
+	 7.用户性别-下拉框
+	 8.注册按钮 ============8分钟
+
+      2.创建01-register.php
+        接收01-register.html提交过来的数据，并插入到数据库，再给提示（注册成功/注册失败）
+      3.完成用户名称的重复性验证（异步，检查数据库中是否已存在当前用户名）5分钟
+      4.两次密码的验证 4分钟
+        当重复密码框失去焦点时，验证两次输入的密码是否一致，并给出提示（通过/，密码不一致）
+
+      
+
+      
+        
+
+

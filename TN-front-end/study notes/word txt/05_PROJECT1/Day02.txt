@@ -1,0 +1,86 @@
+1.复习：
+  1.在php中，将数组转换成json字符串
+    $array=["鼠标","笔记本","钢笔"];
+    $str=json_encode($array);
+  2.XML语法规范
+    xml未预定义，需要自己定义
+    是做数据传递，展示数据
+    1.规范
+      1.声明
+        <?xml version="1.0" encoding="utf-8"?>
+      2.语法结构
+        1.必须成对出现
+	2.严格区分大小写
+	3.可以嵌套，注意嵌套顺序
+	4.必须的根元素
+	5.也可以自定义属性（与HTML中写法一致，但属性值必须用“”括起来）
+    2.解析XML内容
+      getElementsByTagName("标签名");
+      返回类数组（类似于数组）
+    3.在php中返回xml格式字符串
+      在php中拼接xml字符串
+      1.必须设置响应的消息头
+        header("Content-Type:application/xml");
+      //header("Content-Type:application/json");
+      2.拼接字符串
+        $xml="<?xml version='1.0' encoding='utf-8'?>"
+	$xml.="<StudentList>"
+            $xml.="<Student>"
+	       ...
+	    $xml.="</Student>"
+	$xml.="</StudentList>"
+
+	echo $xml;
+===============
+项目：
+  1.查询用户表，显示如图所示
+     1.创建03-user-list.php文件
+       1.获取用户表里的数据 5分钟
+         1.数据库连接
+	 2.拼sql语句
+	 3.执行查询，并得到结果
+	 4.将查询结果转换为关联数组
+	 5.将关联数组转换为JSON格式并响应
+     2.创建03-user-list.html 3分钟
+         1.创建一个表格的表头
+	   <thead></thead>
+	 2.创建表主体
+	   <tbody id="mybody"></tbody>
+  2.实现删除
+    点击删除这条数据立马没了，删完当前这条数据后还得加载用户列表
+    //删除指定的用户
+      参数uid:要删除的用户ID
+   <a href="javascript:deteleUser(user.uid)"></a>
+   1.在php中根据前端传递过去的uid完成删除
+   2.在用户列表页03-user-list.html,完成异步删除
+     function deleteUser(uid){
+        //用户ID作为参数传递给后端
+        //异步删除
+
+      }
+
+   3.新建05-sel-update.php文件
+      注意：
+        1.首先新建一个html模版页，保存时将文件的后缀更为.php
+	2.在当前.php文件的顶部写php代码
+	  2.1根据传递过来的uid去查询当前用户的信息
+       
+     2.将查询的用户数据显示在表单控件中。
+     3.执行修改动作
+       创建一个05-update.php文件
+       在此文件中执行修改数据（根据传递过来的uid）
+      
+     课后练习：
+        1.把今天讲的项目自己再写一遍
+
+	2.尝试做用户列表的分页
+	  1.当前想看的页数时第几页 currentPage
+	  2.每一页显示的条数 pageSize 10条
+	  3.总条数 totalSize
+	    一共显示几页:totalSize/pageSize  4页
+
+
+
+
+
+     
