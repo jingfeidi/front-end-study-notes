@@ -1,7 +1,7 @@
 # front-end-study-notes
 前端学习笔记
 
-### 用Git将本地文件夹上传到GitHub的操作
+## 用Git将本地文件夹上传到GitHub的操作
  ###### 1.在GitHub上新建一个New repository远程仓库后(比如front-end-study-notes)，在本地文件夹里打开命令窗口，将远程仓库克隆到本地：<br>
  ```
  git clone git@github.com:jingfeidi/front-end-study-notes.git
@@ -36,7 +36,7 @@
  git push git@github.com:jingfeidi/front-end-study-notes.git
  ``` 
 
- ### 第二天，将本地仓库新增的文件夹上传给远程仓库
+ ## 第二天，将本地仓库新增的文件夹上传给远程仓库
  ###### 将远程库与本地同步（如果远程仓库里面有文件等内容需要执行以下这一步）<br>
  ```
  git pull --rebase origin master
