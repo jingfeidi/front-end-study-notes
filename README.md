@@ -35,7 +35,7 @@
  ```
  git push git@github.com:jingfeidi/front-end-study-notes.git
  ```
- 
+ <br><br>
  ### 第二天将本地仓库新增的文件夹上传给远程仓库
  ###### 将远程库与本地同步（如果远程仓库里面有文件等内容需要执行以下这一步）<br>
  ```
