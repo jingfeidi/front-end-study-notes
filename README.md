@@ -22,7 +22,7 @@
   git add TN-front-end 
   ```
 
- ###### 把修改过的文件全部添加到暂存区<br>
+ ###### 把所有修改过的文件全部添加到暂存区<br>
  ```
  git add .
   ```
@@ -42,8 +42,25 @@
  git pull --rebase origin master
  ```
  
+ ###### 查看工作区和暂存区的当前状态<br>
+ ```
+ git status
+ ```
+ 
+ ###### 把所有修改过的文件全部添加到暂存区<br>
+ ```
+ git add .
+  ```
+
+ ###### 提交所有更新过的文件<br>
+ ```
+ git commit -m "commit message"
+ ```
+ 
  ###### 把本地内容推送到远程库 使用 git-push<br>
  ```
  git push -u origin master
  ```
- 
+ ```
+ 或者 git push git@github.com:jingfeidi/front-end-study-notes.git
+ ```
