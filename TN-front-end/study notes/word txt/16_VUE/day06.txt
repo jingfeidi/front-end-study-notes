@@ -1,0 +1,21 @@
+综合练习：
+ demo02.html
+ 开发方式：直接引入对应的js文件
+ 实现一个SPA，两个组件类，分别是cart和orderConfirm，希望SPA默认显示cart；
+ 在cart中有一个按钮（去结算）--》跳转到订单确认页面，并将价格123，传递给orderConfirm
+ orderConfirm接受传递来的参数渲染在h1标签中
+
+传参步骤：
+①明确发送方和接收方
+cart--》orderConfirm
+
+②配置接收方的路由地址
+/oc --> /oc/:price
+this.$route.params.price
+③发送
+/oc/123
+
+
+
+
+

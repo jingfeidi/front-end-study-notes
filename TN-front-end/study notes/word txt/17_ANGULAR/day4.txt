@@ -1,0 +1,202 @@
+https://router.vuejs.org/zh-cn/advanced/navigation-guards.html
+
+const router = new VueRouter({ ... })
+
+router.beforeEach((to, from, next) => {
+  // ...
+})
+
+一、组件间通信的补充
+  1、ViewChild
+     ①父组件中调用子组件指定引用的名称
+      <son #mySon></son>
+     ②调用
+      import {ViewChild} from '@angular/core'
+
+      @ViewChild('mySon') mySon = null;
+
+      this.mySon//son组件的实例对象
+
+  2、本地变量#
+   ①父组件中调用子组件指定引用的名称
+      <son #mySon></son>
+   ②直接在父组件的模板当中操作son实例
+     mySon.**
+     <button (click)="handleClick(mySon.sonName)"></button>
+
+二、路由模块的使用
+ 路由模块的定位：建立url和组件映射关系
+
+ 1、复习Vue中路由模块
+    基本使用
+	引入vue-router.js
+	<router-view></router-view>
+	创建需要用到的组件
+	路由词典： new Vue({
+	    router:new VueRouter({
+	      routes:[
+	       {path:'/',component:***},
+	       {path:'/login',component:***},
+	       {path:'*',component:NotFound}
+	      ]
+	    })
+	 })
+		
+    跳转方式
+	①直接修改地址栏
+	② this.$router.push()
+	③ <router-link to=""></router-link>
+
+	this.$router.go(-1);
+    传参
+	①明确发送方和接收方
+	②配置接收方的路由地址
+	 {path:'/detail'}
+	 -->
+	 {path:'/detail/:id'}
+	 this.$route.params.id
+	③发送
+  	 this.$router.push('/detail/2')
+	 <router-link to="/detail/2">
+	 </router-link>
+	
+    嵌套路由:
+	在一个路由对象 支持嵌套其他的路由对象（在一个组件 可以嵌套其他的组件)
+	比如A组件 需要嵌套B组件 C组件
+	①给A组件指定个容器
+	 <router-view></router-view>
+	②给B、C配置路由
+	 {
+	   path:'/a',
+	   component:A,
+	   children:[
+	     {path:'/',component:B},
+	     ....
+	   ]
+	 }
+
+ 2、Angular路由模块的基本使用
+
+   ①指定容器
+    <router-outlet></router-outlet>
+   ②创建需要用到的组件类
+   ③自定义的路由模块
+	app.router.ts
+	配置路由词典
+	注意事项:forChild->forRoot
+   ④根模块中去指定依赖自定义路由模块
+	app.module.ts
+	import {AppRoutingModule} from './app.router'
+
+	@NgModule({
+	 imports:{AppRoutingModule}
+	})
+
+ 3、Angular页面之间的导航
+	①直接修改地址栏
+	②js
+	  import {Router} from '@angular/router'
+
+	  constructor(private myRouter:Router){}
+		
+	 this.myRouter.navigateByUrl('register')
+	③a
+	 <a routerLink="register"></a>
+	④返回上一页
+		import {Location} from '@angular/common' 
+		constructor(private myLocation:Location){
+		
+		}
+		this.myLocation.back();
+
+  练习： (:- 14:40)
+	demo17_lianxi
+	 
+	 一个spa，有两个组件，
+	 demo17_product.component.ts
+	 (购买按钮，点击跳转cart)
+	 demo17_cart.component.ts
+	 (查看详情 a，点击跳转product)
+
+	 要求默认显示 demo17ProductComponent
+ 
+ 4、Angular路由传参
+    ①明确发送方和接收方
+    ②配置接收方的路由地址
+	/detail --> /detail/:id
+	//vue:this.$route.params.id
+	import {ActivatedRoute} from '@angular/router'
+
+	constructor(private myAR:ActivatedRoute){}
+
+	this.myAR.params.subscribe((result)=>{
+		//result.id
+	})
+    ③发送
+	routerLink="detail/2"
+	[routerLink]="'detail/'+myIndex"
+	this.myRouter.navigateByUrl('detail/2')
+	this.myRouter.navigateByUrl('detail/'+myIndex)
+
+ 5、Angular路由嵌套
+	login
+	mail (inbox outbox)
+     ①完成4个组件的创建和声明
+     ②给mail指定容器
+	router-outlet
+     ③配置路由
+	{
+	  path:'mail',
+	  component:Demo19MailComponent,
+	  children:[
+	    
+	  ]
+	}
+    注意事项：跳转到嵌套的路由: /mail/inbox
+
+ 6、Angular路由守卫
+	①service创建
+	 import {Injectable}  from '@angular/core'
+	 import {CanActivate} from '@angular/router'
+
+	 @Injectable()
+	 export class Demo20Guard implements CanActivate{
+           //返回的值 决定了保护的路由对象中的组件类是否能够被访问
+	   canActivate(){
+	    //处理
+	    return true/false
+	   }
+	   
+	 }
+	②到模块中的providers指定service
+		app.module.ts
+		import {Demo20Guard}  from '...'
+		@NgModule({
+		 providers:[Demo20Guard]
+		})
+        ③配置路由词典指定路由守卫
+	  app.router.ts
+	  import {Demo20Guard} from ''
+	  {
+	     path:'demo20',
+	     component:Demo20Component,
+	     canActivate:[Demo20Guard]
+	  }
+
+
+每日一练：
+练习：demo21/
+	SPA有3个组件：
+		Demo21CheckComponent/Demo21PayComponent/Demo21SendComponent
+	check:button 点击跳转到pay,同时传递商品价格100给pay
+	pay: h1 显示商品价格信息 button 点击跳转send
+	send: routerLink-->check
+
+	步骤1:搭建架子，要求通过不同的url能够访问3个组件
+	步骤2：搞定跳转
+	步骤3：搞定传参
+		①明确发送方和接收方
+		②配置pay的路由地址
+		③跳转的同时发送
+
+	

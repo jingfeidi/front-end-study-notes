@@ -1,0 +1,30 @@
+1、针对路由模块综合练习
+(:- 10:00)
+练习：实现一个SPA，在这个SPA有两个组件类，cart和orderConfirm；
+①在cart有一个按钮，点击跳转到orderConfirm，在跳转的同时发送价格为200
+②orderConfirm接受到价格信息，显示在h2标签
+③在orderConfirm中嵌套stepOne stepTwo，同时在orderConfirm中希望默认加载stepOne
+  在orderCOnfirm，指定容器 router-view
+  在orderConfirm的路由对象指定children
+
+
+2、熟悉基于命令行的开发方式
+
+2.1 认识工程目录结构
+assets 资源文件(img/css/js/fonts/..)
+components 组件
+router/index.js 完成路由词典的设置
+App.vue 根组件
+main.js 创建一个Vue的实例，同时指定根组件
+
+2.2 启动的方式
+npm start之后做的事情：
+①通过node执行build/dev-service.js 指定开发服务器并端口8080
+②加载index.html和main.js
+(在main.js 通过new Vue指定router/根组件)
+③根据路由匹配规则，从router/index.js加载路由地址为空 显示Hell.vue
+
+3、练习
+
+4、搭建项目的脚手架
+

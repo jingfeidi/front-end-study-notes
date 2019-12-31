@@ -1,0 +1,164 @@
+一、service
+
+  服务是为了封装应用中逻辑，为了在组件中去复用
+   1、创建
+	log.service.ts
+        
+	import {Injectable} from '@angular/core'
+	@Injectable()
+	export class LogService{
+	   test(){}
+	}
+
+   2、使用
+ 	 2.1 到模块中指定提供商
+	  app.module.ts
+	  import {LogService} from '...'
+	  @NgModule({
+	    providers:[LogService]
+	  })
+	 2.2 到组件中去调用
+	  //引入
+	  import {LogService} from '...'
+	  //到构造函数中去实例化
+	  constructor(private myLS:LogService){}
+	  //使用
+	  this.myLS.test()
+
+   3、练习：实现一个心跳服务，在心跳服务中封装两个方法：
+	   start 启动周期性定时器，每隔0.5s '在心跳'
+	   stop 关闭定时器
+
+	   demo11_lianxi/demo11.component.ts
+	   两个按钮，开始心跳 结束心跳
+
+	   ①完成组件的创建、声明、调用
+	   ②完成服务的创建、提供商的指定、调用
+
+   4、网络请求服务
+    4.1 创建
+       myhttp.service.ts
+       
+       constructor(private http:Http){}
+
+       sendRequest(myUrl:string){
+         //a-http-get
+         return this.http.get(myUrl)
+	 .map((response:Response)=>response.json())
+       }
+    4.2 使用
+       4.2.1 到模块中指定Providers
+        app.module.ts
+	import {MyHttpService} from '..'
+	@NgModule({
+	  providers:[MyHttpService]
+	})
+       4.2.2 指定依赖于HttpModule
+	       app.module.ts
+	       import {HttpModule} from '@angular/http'
+	       @NgModule({
+		 imports:[HttpModule]
+	       })
+
+       4.2.3 到组件去调用服务
+        import {MyHttpService} from '..'
+
+	constrcutor(private myHS:MyHttpService){}
+
+	this.myHS.sendRequest('').subscribe((result)=>{})
+    4.3 进阶
+	处理通信过程中涉及到session的问题？
+	 4.3.1 客户端
+	 this.http.get(myUrl,{withCredentials:true})
+	 4.3.2 服务器
+	 header('Access-Control-Allow-Origin:http://localhost:3000');
+	 header('Access-Control-Allow-Credentials:true');
+    4.4 练习(:- 15:55)
+	创建一个app/demo13.component.ts
+	store.http.service
+	
+	服务需求：
+		发起网络请求
+	组件类：
+		一个无序列表 一个按钮
+		点击按钮时，通过服务中的方法，获取商品列表，将商品的标题显示在无序列表中
+	
+	 
+二、组件之间的通信的方法
+
+  学习一个框架：基本语法+通信的方式(内部、服务器)+router
+
+  1、复习 Vue中组件间通信：
+	①props down (father->son)
+	 发送
+	  Vue.component('father',{
+	    template:`<son sonName='zhangsan'></son>`
+	  })
+	 接受
+	  Vue.component('son',{
+	    props:['sonName']
+	    // this.sonName
+	   })
+	②events up (son->father)
+	 绑定(father)
+	     Vue.component('father',{
+		template:`<son @customEvent="handleEvent"></son>`
+	  })
+	 触发(son)
+	   this.emit('customEvent',123)
+	③ref
+	④$parent
+	⑤bus
+  
+  2、Angular组件间通信：
+   1、props down(父与子的通信)
+	1.1 发送
+	  <demo14-son 
+	  msg='hello world'>
+	  </demo14-son>
+	1.2 接受
+     	 import {Input} from '@angular/core'
+
+	 @Input() msg="";
+
+	 // this.msg
+
+   2、events up (子与父的通信)
+	2.1  绑定
+	     <demo14-son	(customEvent)="handleEvent()">
+	     </demo14-son>
+	     2.1.1 定义一个方法
+		rcvMsg(msg:string){}
+	     2.1.2 绑定
+	  <demo14-son (toFatherEv ent)="rcvMsg($event)">	       </demo14-son>
+	2.2  触发
+	 import {Output,EventEmitter} from '@angular/core'
+
+	 @Output() toFatherEvent = new EventEmitter();
+
+	 this.toFatherEvent.emit('123');
+
+
+三、自定义指令如何来实现数据的传递
+ 1、发送
+  <any test="123" ></any>
+ 2、接受
+  到指令类中接受传递来的数据
+  import {Input} from '@angular/core'
+
+  @Input() test = "";
+
+  //this.test
+
+  每日一练：
+	父子组件相互通信
+	demo15/my-chatroom.component.ts
+	my-user.component.ts
+	my-chatroom:一个无序列表 和 两个my-user构成
+	my-user：label/input/button
+
+	①完成组件的创建和使用
+	②调用my-user指定mike lucy (父与子)
+	③点击发送 （子与父）
+
+  
