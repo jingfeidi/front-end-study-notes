@@ -1,5 +1,7 @@
 # 01_SPEC_Day01
+截图笔记
+
 
 ## 01前端知识系统介绍
 
-![](http://b33.photo.store.qq.com/psu?/3ad77625-16bc-4e25-9f4e-6c6a7a636d63/JUScL*4GouLl2k26cDbvUUkcewPdd6gpQLsyBKSqVpQ!/m/YVGGsRPZJwAAYhJL6RGJlQAAnull&a=33&b=30&bo=SgIgAwAAAAAEAEk!&rf=photolist&t=5)
+![](http://m.qpic.cn/psc?/V10W2BF90tc8Q9/4YNML3SP3kohrZcOJ8e1ur22Gjy55MfS7maBqYxDwFesYXxq*DCGtFw6dRoX18VQeJsXdkxj8hKaM6abb3xKJWTDcFmrHemC60pbGAdue6Y!/b&bo=iwLlAQAAAAADB08!&rf=viewer_4)
