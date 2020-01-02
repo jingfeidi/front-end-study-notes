@@ -30,7 +30,7 @@
 
 ## 02程序员必备的素质
 
->![](http://m.qpic.cn/psc?/V10W2BF90tc8Q9/4YNML3SP3kohrZcOJ8e1uly99ALFQlASM*5WuFOewOoYDACd59xcjnSaaO4g37AHwMr21Aog7GwJMnjsAiKug6nGqeMXaEH1GGZNE3S4kxs!/b&bo=MAFhAAAAAAADB3I!&rf=viewer_4)D1-2.1
+>![](http://m.qpic.cn/psc?/V10W2BF90tc8Q9/4YNML3SP3kohrZcOJ8e1uvca1za3ZOIVcYNwtZpADqAN51J.2hREUDDl.lc4TsWdfsIXnkKWaaeDKyBxBYGqXEVJBUst6tRNMubZxj7Mkt0!/b&bo=VAHPAAAAAAADF6g!&rf=viewer_4)D1-2.1
 
 >![](http://m.qpic.cn/psc?/V10W2BF90tc8Q9/4YNML3SP3kohrZcOJ8e1uvRvMULvhbyWvDzgHUN5DRGfDQMgCAqnQ42zjmcdRmKl9qwh1DCqd31ooYqNVFBZJxLuW2qW6IPw7IbuY0*1lKg!/b&bo=dALoAAAAAAADF6w!&rf=viewer_4)D1-2.2
 
