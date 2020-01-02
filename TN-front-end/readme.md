@@ -35,3 +35,7 @@ TN前端大辞典思维导图(mmap格式)<br>
 
 
 ## study notes/word txt
+word文件 or txt文件
+
+
+
