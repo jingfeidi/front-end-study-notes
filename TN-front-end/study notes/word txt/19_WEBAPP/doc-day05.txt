@@ -1,0 +1,117 @@
+WEBAPP
+
+Ionic Day05
+
+1. tabs.ts 做判断：用户是否已经登录了
+    a. 登录了，user tab 页中显示登录用户的信息
+    b. 未登录, 跳向登录页面
+
+2. tabs.ts 中，引入 Storage，依赖注入 constructor
+    a. import {Storage} from '@ionic/storage';
+    b. private storage: Storage
+
+3. tabs.ts constructor 中，从 storage 中取 user 键对应的值
+    this.storage.get('user').then(value => {
+        if(!value) {
+            this.userPage = 'SignInPage';
+        }
+    });
+
+4. user.ts 中
+    a. 定义 user 属性
+    b. ionViewDidLoad 中，从 storage 取出 user，赋值给 this.user
+    c. ionViewDidLoad，Ionic 页面生命周期函数之一
+
+5. user.html 中，显示用户的基本信息：avatar / email
+
+6. user.html 中，为注销绑定事件函数 (tap)="signOut()"
+
+7. user.ts 中，定义 signOut()
+    this.storage.clear();
+    this.navCtrl.push('SignInPage');
+
+8. 用户登录
+
+9. sign-in.ts 定义 user
+
+10. sign-in.html 表单数据双向绑定，为登录提交绑定事件
+
+11. sign-in.ts 定义 signIn 函数
+
+12. sign-in.ts 提交登录请求
+    12.1 ionic.config.json，添加登录代理
+    12.2 引入 HttpClient，依赖注入
+    12.3 this.httpClient 发送登录 post 请求，做响应接收
+
+13. app.js 中，添加登录请求的接收
+
+14. 登录请求的处理
+
+15. 返回合适的响应
+
+16. sign-in.ts 中，解析响应结果，做对应的处理
+    a. 登录成功
+    b. 登录失败，alert 提示信息
+
+17. 登录成功
+    17.1 引入 Storage，DI
+    17.2 app.js 中，用户登录成功时，返回数据库查询到的 user
+        res.send({
+            "status": "ok",
+            "user": results[0]
+        });
+
+    17.3 sign-in.ts 中，在 storage 中设置用户信息
+         this.storage.set('user', res['user']);
+
+18. 创建用户个人信息页面
+    app-project/ 下，cmd: ionic g page userInfo
+
+19. user.html 中，为设置按钮添加点击事件
+    (tap)="toUserInfoPage()";
+
+20. user.ts 中，定义 toUserInfoPage
+    this.navCtrl.push('UserInfoPage');
+
+21. user-info.html，添加个人信息表单
+
+22. user.ts 中，跳向 UserInfoPage 时传递参数 this.user
+    this.navCtrl.push('UserInfoPage', {
+        user: this.uer
+    });
+
+23. user-info.ts 中，接收参数
+    23.1 user:any;
+    23.2 constructor
+         this.user = navParams.get('user');
+
+24. user-info.html 中，数据双向绑定
+
+25. 练习：实现用户个人信息的设置 // todo
+
+26. Ionic 组件：infinite-scroll 无限滚动
+
+27. home.html 中，添加列表
+
+28. home.ts 中，定义属性 itmes = [];
+
+29. home.ts 中，constructor 中初始化 items
+
+27. home.html 中，添加 ion-infinite-scroll 组件
+
+28. home.ts 中，定义函数 doInfinite()
+
+29. 创建商品表，为商品表添加样本数据
+
+30. 一个商品的视图
+
+31. 在首页里显示商品数据，无限列表展示
+
+32. 练习
+    32.1 实现用户个人信息的设置
+         DB：update
+    32.2 基本的 ion-infinite-scroll
+    32.3 实现商品展示视图
+    32.4 实现商品的无限滚动
+         DB: 分页查询
+

@@ -1,0 +1,140 @@
+WEBAPP
+
+Ionic Day04
+
+1. 解压 app-project.zip，放在 Ionic-1710N/ 下
+   app-project 是基于 Ionic tabs 模板创建的空项目
+   cmd：ionic start app-project tabs
+   cmd: cd app-project
+   cmd: npm i
+   cmd: ionic serve -l
+
+2. 为 app-project 添加一个新的 tab 页
+    2.1 创建一个新的页面 test
+        app-project/ cmd: ionic g page test
+    2.2 tabs.ts
+        a. import {TestPage} from '../test/test';
+        b. tab4Root = TestPage;
+    2.3 tabs.html
+        <ion-tab [root]="tab4Root" title="test page" tabIcon="heart"></ion-tab>
+    2.4 app.module.ts
+        a. import {TestPage} from '../pages/test/test';
+        b. declarations 添加 TestPage
+        c. entryComponents 添加 TestPage
+
+3. test 的 tab 页实现 lazy loading
+    3.1 app.module.ts
+        删除 import 和两个数组的元素
+    3.2 tabs.ts
+        a. 删除 import
+        b. tab4Root = 'TestPage';
+
+4. 删除 pages/ home contact about test 目录
+
+5. tabs.ts
+    a. 删除 import home contact about
+    b. 删除 tab1Root - tab4Root 属性
+
+6. tabs.html 删除所有的 ion-tab 标记
+
+7. app.module.ts
+    删除 home contact about 的 import 和 元素
+
+8. 创建五个页面
+    home(首页)
+    find(发现)
+    cat(分类)
+    cart(购物车)
+    user(个人)
+
+    app-project/ 下 cmd：ionic g page
+
+9. 把五个页面设置为 tab 页
+    9.1 tabs.ts
+        声明属性
+          homePage = 'HomePage';
+          findPage = 'FindPage';
+          catPage = 'CatPage';
+          cartPage = 'CartPage';
+          userPage = 'UserPage';
+    9.2 tabs.html
+          <ion-tab [root]="homePage" tabTitle="首页" tabIcon="home"></ion-tab>
+          <ion-tab [root]="findPage" tabTitle="发现" tabIcon="search"></ion-tab>
+          <ion-tab [root]="catPage" tabTitle="分类" tabIcon="list"></ion-tab>
+          <ion-tab [root]="cartPage" tabTitle="购物车" tabIcon="cart"></ion-tab>
+          <ion-tab [root]="userPage" tabTitle="个人" tabIcon="contact"></ion-tab>
+
+10. https://www.iconfont.cn
+
+11. 解压 server-project.zip，放在 Ionic-1710N/ 下
+
+12. server-project/sql/db.sql，建库建表
+
+13. server-project/ 下创建文件 app.js，设置简单的服务器端
+    const express = require('express');
+    let app = new express();
+    app.listen(3000);
+
+14. server-project/ cmd: node app | supervisor app
+
+15. 下载 default.png，放在 src/assets/avatars/ 下
+
+16. user.html，创建用户登录表单，和一个注册按钮，绑定 tap 事件
+
+17. app-project/ cmd: ionic g page signUp
+
+18. user.ts 中定义函数 toSignUpPage，跳向 SignUpPage
+    this.navCtrl.push('SignUpPage');
+
+19. sign-up.html 实现注册表单，为注册提交按钮绑定 tap 事件
+
+20. sign-up.ts 定义 user = {email: '', password: ''};
+
+21. sign-up.html 表单数据双向绑定
+
+22. sign-up.ts 定义注册提交函数 signUp()
+
+23. app.module.ts 引入 HttpClientModule，加入 imports
+
+24. sign-up.ts 引入 HttpClient
+
+25. Constructor 中 DI HttpClient
+
+26. ionic.config.json 中，设置注册请求的代理
+
+27. sign-up.ts signUp() 中，发送注册请求，接收，输出响应
+
+28. app.js，接受用户注册请求
+
+29. app.js，配置 body-parser 中间件，解析请求的表单数据
+
+30. app.js，返回一个响应
+
+31. app.js 中，处理注册请求，返回对应的响应
+
+32. 对注册用户的密码进行加密，bcrpytjs
+    32.1 app.js 引入 bcryptjs
+    32.2 对密码进行加密
+         bcryptjs.hashSync(plainPassword,
+         bcryptjs.genSaltSync(10));
+
+33. sign-up.ts 中，解析返回的响应信息，根据不同的结果做处理
+
+34. 如果用户注册成功了，视为登录成功，此时在 Ionic 客户端保存用户信息
+    34.1 app.module.ts 中，引入 IonicStorageModule
+         import {IonicStorageModule} from '@ionic/storage';
+         加入 imports 数组
+         IonicStorageModule.forRoot()
+    34.2 sign-up.ts 中，引入 Storage
+         import {Storage} from '@ionic/storage';
+    34.3 Storage 依赖注入构造器
+    34.4 使用 this.storage 保存用户信息
+         this.storage.set('key', value);
+
+35. 创建页面 signIn，放置登录表单
+
+36. tabs.ts 做判断：用户是否已经登录了
+    a. 登录了，user tab 页中显示登录用户的信息
+    b. 未登录, 跳向登录页面
+
+37. 练习：基于 tabs 的用户注册登录系统

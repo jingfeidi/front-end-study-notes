@@ -1,0 +1,104 @@
+WEBAPP
+
+Ionic Day06
+
+1. 实现用户个人信息的设置
+
+2. user-info.html，为保存按钮添加 tap 事件响应
+
+3. user-info.ts，定义函数 saveUserInfo()
+
+4. user-info.ts，测试表单数据接收
+    console.log(this.user);
+
+5. user-info.ts，发送保存个人信息的 HTTP 请求
+    5.1 引入 HttpClient，DI HttpClient
+    5.2 this.httpClient.post();
+
+6. ionic.config.json，代理设置的简化：
+    "proxies": [
+        {
+            "path": "/",
+            "proxyUrl": "http://127.0.0.1:3000/"
+        }
+    ]
+
+7. app.js，用户保存个人信息请求
+    7.1 接收请求
+    7.2 处理请求
+    7.3 返回响应
+
+8.
+
+9. sign-in.ts，去掉 user 的参数传递
+    this.navCtrl.push('UserPage');
+
+10. user-info.ts，从 storage 中获取用户信息
+    constructor(..., private storage: Storage) {
+        this.storage.get('user').then(value => {
+          this.user = value;
+        });
+    }
+
+11. app.js，用户注册成功时，再次查询当前注册用户的信息，返回 user
+
+12. sign-up.ts，把服务器返回的 user 放入 storage
+
+13. 实现商品展示视图
+    home.html，ion-list>ion-item>(ion-thumbnail>img)+h2+p+button
+
+14. home.html 展示来自于数据库的商品信息，前 20 条记录
+    sql = 'SELECT * FROM db.product LIMIT 20 OFFSET 20 * (page - 1)';
+
+15. home.ts
+    15.1 声明属性 products
+    15.2 ionViewDidLoad 发出 HTTP 请求商品表前 20 条记录
+
+16. app.js
+    16.1 接收 get 请求
+    16.2 处理请求
+    16.3 返回响应
+
+17. home.ts
+    this.products = res;
+
+18. home.html
+    展示数据
+
+19. 实现商品的无限滚动
+
+20. home.html
+    添加 ion-infinite-scroll>ion-infinite-scroll-content
+    为 ion-infinite-scroll 绑定事件 ionInfinite
+
+21. home.ts
+    21.1 定义函数 loadMoreData
+    21.2 发送 HTTP 请求商品的第 2 页数据
+
+22. 请求路径参数的设置和获取
+    22.1 this.httpClient.get('/products/1', ...)...
+    22.2 app.get('/products/:page', (req, res) => {
+               const pageSize = 20;
+               let page = req.params.page;
+               let sql = `SELECT *
+                            FROM db.product
+                            LIMIT ${pageSize}
+                            OFFSET ?`;
+               pool.query(sql, [pageSize * (page - 1), ...]
+         });
+
+23. home.ts
+    定义属性 page:number = 1;
+    loadMoreData():void {
+        let url = `/products/${++this.page}`;
+    }
+
+24. 解决数据全部加载完成后，还继续发送请求的问题
+    24.1 home.ts
+         定义属性 hasMoreData: boolean = true;
+
+25. home.html
+    ion-infinite-scroll 添加属性
+    *ngIf="hasMoreData"
+
+26. 练习：实现商品详情页面
