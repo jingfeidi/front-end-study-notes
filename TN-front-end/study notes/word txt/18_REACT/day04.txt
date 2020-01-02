@@ -1,0 +1,243 @@
+https://github.com/enaqx/awesome-react
+
+https://github.com/jondot/awesome-react-native
+一、FlatList
+ import {FlatList} from 'react-native';
+ //data指定数据源
+ //renderItem指定渲染列表项的方法，返回要渲染元素内容
+ <FlatList data={} renderItem={}></FlatList>
+
+ 注意事项：
+	1、如果在渲染列表项目，有警告提示key的问题，解决方案：在数据源每一个数据添加上一个key属性，而且key保证唯一性
+	2、renderItem对应的处理函数是有参数的，这个参数是一个对象，对象中包含两个属性：item(对应的是遍历的集合中临时变量)\index(下标),还必须有返回值
+
+二、TextInput
+   import {TextInput} from 'react-native'
+
+   <TextInput
+    secureTextEntry={true}
+    placeholder='plz input'
+    onChangeText={(msg)=>{}}
+    keyboardType=''
+   ></TextInput>
+
+
+    练习demo09_lianxi/demo09.js
+	  创建一个组件类，组件类中有一个TextInput
+	  要求：默认显示的值是zhangsan，按照受控表单元素的方式来处理
+
+	   TextInput基本用法
+	   状态的基本操作
+
+
+三、TouchableOpacity
+  功能：将组件中调用的元素 添加上透明度渐变的效果
+   import {TouchableOpacity} from 'react-native'
+   <TouchalbelOpacity>
+	<Text></Text>
+   </TouchableOpacity>
+
+四、switch
+	Android：Google所提倡Material Design (MD)
+	iOS: Apple 扁平化设计风格
+
+	受控表单元素的解决方案：
+	①初始化状态
+	②将状态绑定到指定的表单元素
+	③给表单元素绑定事件，在事件处理函数中完成状态的修改
+
+
+五、fetch
+ Angular发起网络请求：
+	①准备工作
+ 	 app.module.ts
+	 import {HttpModule} from '@angular/http'
+	 @NgModule({
+	  imports:[HttpModule]
+	 })
+	②服务
+	 import {Injectable} from '@angular/core'
+	 import {Http,Response} from '@angular/http'
+
+	 @Injectable
+	 export class MyHttpService{
+	   constructor(private http:Http){}
+
+	   sendRequest(url:string){
+	     return this.http.get(url).map((response:Response)=>{
+	      return response.json();
+	     })
+	   }
+	 }
+	③指定providers
+	 app.module.ts
+	 import {MyHttpService} from '..'
+	 @NgModule({
+	  providers:[MyHttpService]
+	 })
+	④component中调用服务
+	 import {MyHttpService} from '**'
+	 constructor(myHS:MyHttpService){}
+
+	 this.myHS.sendRequest(url).subscribe((result)=>{})
+
+ Vue发起网络请求：
+	①import VueResource from 'vue-resource'
+	②Vue.use(VueResource);
+	③this.$http.get().then(()=>{})
+
+ React中fetch
+
+ json格式的序列化:变成json格式的字符串
+ json格式的反序列化：将json格式的字符串变成对象或者数组
+	fetch("serverurl")
+	 .then((response)=>{return response.json()})
+	 .then((result)=>{
+	  //result就是服务器端返回的真正的结果
+	 })
+  练习：demo13_lianxi/demo13.js
+  (:- 15:35)
+  在demo13.js中 创建一个组件，在组件挂载完毕3s之后，向服务器端发请求(http://172.163.100.139/ajia_code/data/product/list.php)，将服务器端返回的数据显示在FlatList（在列表项中显示title到Text中）
+
+  fetch FlatList lifeCycle state
+
+
+六、ScrollView
+  功能：让组件支持滚动效果
+  用法:
+	import {ScrollView} from 'react-native';
+
+	<ScrollView>
+		...
+		...
+	</ScrollView>
+
+
+	Text View Image TextInput Button Switch
+	FlatList ScrollView TouchableOpacity
+	fetch
+	StyleSheet
+
+
+七、Flexbox
+ flexDirection 主轴是row/column 默认是column
+
+ alignItems 沿着交叉轴的对齐方式
+
+ justifyContent 沿着主轴的对齐方式
+
+八、Navigation
+ 路由模块的本质 是建立url和组件映射关系
+ Angular
+	1、基本用法
+	   准备工作
+	     ①创建自定义路由模块app.router.ts
+	      import {Routes,RouterModule} from '@angular/router'
+	      
+              const myRoutes:Routes = [
+	       {path:'',component:**}
+	      ]
+
+	      @NgModule({
+	        imports:[RouterModule.forRoot()],
+		exports:[]
+	      })
+
+	      export class AppRoutingModule{}
+
+	     ②到跟模块中指定依赖于路由模块app.module.ts
+	      import {AppRoutingModule} from './app.router'
+	      @NgModule({
+	       imports:[AppRoutingModule]
+	      })
+	   指定容器 router-outlet
+	2、跳转方式
+	   ①js
+	     import {Router} from '@angular/router'
+	     
+	     constuctor(private myRouter:Router){}
+
+	     this.myRouter.navigateByUrl('/login')
+
+	   ②routerLink
+	     <any routerLink='/login'></any>
+	3、路由传参方式
+	  ①明确发送方和接收方
+	  ②配置接收方的路由地址、接受参数
+	   path:'detail'
+  	   path:'detail/:id'
+	   接受参数:
+	    import {ActivatedRoute} from '@angular/router'
+	    
+	    constructor(private myAR:ActivatedRoute){}
+
+	    this.myAR.params.subscribe((result)=>{})
+	  ③发送
+	4、路由嵌套
+	 ①指定容器
+	  router-outlet
+	 ②配置子路由 
+	  {
+	    path:'mail',
+	    component:MailComponent,
+	    children:[
+	    {},{}]
+	  }
+ Vue
+	1、基本用法
+	   <script src='js/vue-router.js'>
+	   指定容器 router-view
+
+	   new Vue({
+	     router:new VueRouter({
+	       routes:[
+	         {path:'',component:**}
+	       ]
+	     })
+	   })
+	2、跳转方式
+	  ①js
+	   this.$router.push('/login')
+	  ②routerLink
+	  <routerLink to='/login'></routerLink>
+	3、路由传参方式
+	  ①明确发送方和接收方
+	  ②配置接收方的路由地址、接受参数
+	    path:'/detail'
+	    path:'/detail/:id'
+	  this.$route.params
+	  ③发送
+	4、路由嵌套
+	 ①指定容器
+	   router-view
+	 ②配置子路由
+	  {
+	    path:'mail',
+	    component:MailComponent,
+	    children:[
+	    {},{}]
+	  }
+ ReactNative实现导航，第三方的项目ReactNavigation
+
+ 基本使用：
+ ①安装
+ npm install react-navigation
+ ②创建要用到的组件
+ ③配置路由
+   import {StackNavigator} from 'react-navigation'
+   
+   import Demo16CartComponent from ''
+
+   const myNavigator = StackNavigator({
+     myCart:{
+       screen:Demo16Component
+     }
+   })
+
+   AppRegistry.registerComponent('myapp', () => myNavigator);
+
+   注意事项：
+    ①引入组件类 花括号
+    ②保证js调试正常打开
+    ③重启开发服务器
+ ④测试

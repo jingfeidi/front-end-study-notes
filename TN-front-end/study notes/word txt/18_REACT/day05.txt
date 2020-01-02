@@ -1,0 +1,129 @@
+练习：
+  demo17_lianxi/
+  有一个RN项目，在项目中有两个组件，分别是
+   myLogin.js(MyLoginComponent)
+  myMain.js(MyMainComponent)
+
+  默认访问登录页
+  每一个组件就显示一个Text
+
+
+一、跳转和传参
+ angular
+    import {Router} from '@angular/router'
+
+    constrcutor(private myRouter:Router){}
+
+    this.myRouter.navigateByUrl();
+ vue
+	this.$router.push('/myLogin');
+ React-Navigation:
+	//基本用法
+	  ①安装
+	   npm install react-navigation
+	  ②创建要用到的组件类
+	  ③配置路由信息
+		import {StackNavigator} from 'react-navigation'
+
+		var myNavigator = StackNavigator({
+		  login:{
+		    screen:LoginComponent
+		  }
+		})
+
+		AppRegistry.registerComponent('myapp',()=>myNavigator)
+
+	//跳转方式
+	 this.props.navigation
+	  .navigate('routeName')
+	
+	//跳转并传递参数
+	 ①明确发送方和接收方
+	 ②发送
+	 this.props.navigation
+	.navigate(
+	'routeName',{price:100})
+	 ③接受
+	 this.props.navigation.state.params.id
+
+ 练习(:- 11:30)：
+	demo19_lianxi/
+	demo19_check.js/demo19_pay.js/demo19_send.js
+	check:button 点击跳转到pay,同时传递商品价格100给pay
+	pay: Text 显示商品价格信息   
+	      button 点击跳转send
+	send: button 点击跳转到check
+
+	步骤1:搭建架子，要求通过不同的url能够访问3个组件
+	步骤2：搞定跳转
+	步骤3：搞定传参
+		①明确发送方和接收方
+		check（发送） pay(接受)
+		②pay接受数据
+		③跳转的同时发送
+
+二、ActivityIndicator
+  基本用法:
+    import {ActivityIndicator} from 'react-native'
+
+    <ActivityIndicator></ActivityIndicator>
+
+   练习：
+    demo21_lianxi/demo21.js
+    在这个组件类Demo21Component,渲染一个Button,ActivityIndicator
+    要求：默认并不显示ActivityIndicator,点击按钮，才显示。
+
+       &&
+
+  扩充：
+   实现选择功能
+    {
+	this.state.isLoading 
+	&& 
+	<Any></Any>
+    }
+   实现循环功能
+    {
+        this.state.list
+        .map(function(child){
+          return <Text>{child}</Text>
+        })
+    }
+
+三、FlatList 进阶
+   onEndReached={()=>{}}
+   onEndReachedThreshold={0.5}
+
+ 
+
+ Text View Image StyleSheet FlatList
+ TextInput Button Switch
+ TouchableOpacity
+ ScrollView..
+ fetch
+ flexbox
+
+demo24_lianxi/todobox.js todolist.js todoinput.js todoitem.js
+通过ReactNative所提供的组件来实现	ToDoBox、ToDoList、ToDoInput、ToDoItem
+
+1、完成4大组件的创建和调用
+
+2、添加 （:- 17_20）
+  ①将todoinput中输入框的数据 点击add，发送给todobox
+     父组件中定义一个带有参数的方法
+     方法传递给子
+     子调用方法传值
+  ②todobox将todoinput传来的数据保存在状态中（数组)
+  ③todobox调用todolist将状态中数据传递给todolist，todolist接受到之后 渲染多个todoitem
+
+3、删除
+  ①todolist在调用todoitem要指定要显示的内容
+  ②实现删除功能
+
+
+
+
+
+
+
+
